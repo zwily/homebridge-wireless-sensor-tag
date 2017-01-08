@@ -12,9 +12,7 @@
         {
             "platform": "wireless-sensor-tag",
             "username": "<<username>>",
-            "password": "<<password>>",
-            "queryFrequency": 60000,
-            "ignoreList": [ "Honda" ]
+            "password": "<<password>>"
         }
     ],
 
