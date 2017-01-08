@@ -27,11 +27,11 @@ function WirelessTempHumidityAccessory(platform, device) {
     var that = this;
 
     // Open/closed
-    this.addService(Service.ContactSensor)
-        .getCharacteristic(Characteristic.ContactSensorState)
-        .on('get', function (callback) {
-        callback(null, that.device.eventState === EventState.CLOSED ? Characteristic.ContactSensorState.CONTACT_DETECTED : Characteristic.ContactSensorState.CONTACT_NOT_DETECTED);
-    });
+//    this.addService(Service.ContactSensor)
+//        .getCharacteristic(Characteristic.ContactSensorState)
+//        .on('get', function (callback) {
+//        callback(null, that.device.eventState === EventState.OPENED ? Characteristic.ContactSensorState.CONTACT_NOT_DETECTED : Characteristic.ContactSensorState.CONTACT_DETECTED);
+//    });
 
     // Temperature
     this.addService(Service.TemperatureSensor)
@@ -71,9 +71,9 @@ function WirelessTempHumidityAccessory(platform, device) {
 
 var loadData = function() {
     // Open/closed
-    this.getService(Service.ContactSensor)
-        .getCharacteristic(Characteristic.ContactSensorState)
-        .getValue();
+//    this.getService(Service.ContactSensor)
+//        .getCharacteristic(Characteristic.ContactSensorState)
+//        .getValue();
 
     // Temperature
     this.getService(Service.TemperatureSensor)
