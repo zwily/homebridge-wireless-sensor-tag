@@ -12,7 +12,7 @@ NOTE: Currently only supports the temperature tags. If someone wants to donate o
 # Installation
 
 1. Install homebridge using: npm install -g homebridge
-2. Install this plugin using: npm install -g homebridge-wireless-sensor-tag
+2. After cloning this repo, install this plugin (while inside the repo): npm install; npm link
 3. Update your configuration file. See sampleconfig.json in this repository for a sample. 
  
 # Configuration
@@ -25,9 +25,7 @@ Configuration sample:
             "platform": "wireless-sensor-tag",
             "name": "wireless-sensor-tag",         
             "username": "user@domain.com",      
-            "password": "password",   
-            "queryFrequency": 20000,
-            "ignoreList": [ "Honda" ]
+            "password": "password"
         }
     ] 
 ```
@@ -37,6 +35,8 @@ Configuration sample:
  * name - Up to you. 
  * username - Your wirelesstags.net username
  * password - Your wirelesstags.net password
- * queryFrequency - The amount of time, in ms, between updates. 1000 = 1000ms = 1second. Recommended value > 10000 as temperature and presence don't change that quickly anyhow.
- * ignoreList - The list of names of tags that should be ignored. If a tag's name is an exact match to one of the strings in this array it is ignored by this plugin.
+ 
+ # To do
+ * Re-add support for ignored tags and query frequency
+ * Possibly reorganize classes so there is less duplicate code
 
