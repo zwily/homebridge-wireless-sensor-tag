@@ -25,11 +25,18 @@ function WirelessMotionAccessory(platform, device) {
     WirelessTagAccessory.call(this, platform, device);
 
     var that = this;
+    
+    // Light
+    this.addService(Service.LightSensor)
+        .getCharacteristic(Characteristic.CurrentAmbientLightLevel)
+        .on('get', function(callback) {
+        callback(null, that.device.lux);
+    });
 
     // Motion
     this.addService(Service.MotionSensor)
         .getCharacteristic(Characteristic.MotionDetected)
-        .on('get', function (callback) {
+        .on('get', function(callback) {
         callback(null, that.device.eventState === EventState.DETECTED_MOVEMENT);
     });
 
@@ -40,27 +47,27 @@ function WirelessMotionAccessory(platform, device) {
 		    minValue: -100,
 		    maxValue: 100
 		})
-        .on('get', function (callback) {
+        .on('get', function(callback) {
         callback(null, that.device.temperature);
     });
 
     // Humidity
     this.addService(Service.HumiditySensor)
         .getCharacteristic(Characteristic.CurrentRelativeHumidity)
-        .on('get', function (callback) {
+        .on('get', function(callback) {
         callback(null, device.cap !== undefined ? Math.round(device.cap) : 0.0);
     });
 
     // Battery
     this.addService(Service.BatteryService)
         .getCharacteristic(Characteristic.BatteryLevel)
-        .on('get', function (callback) {
+        .on('get', function(callback) {
         callback(null, device.batteryRemaining * 100);
     });
 
     this.getService(Service.BatteryService)
         .getCharacteristic(Characteristic.StatusLowBattery)
-        .on('get', function (callback) {
+        .on('get', function(callback) {
         if (that.device.batteryRemaining < 0.25)
             callback(null, Characteristic.StatusLowBattery.BATTERY_LEVEL_LOW);
         else
