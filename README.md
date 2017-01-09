@@ -2,12 +2,7 @@
  
 Homebridge platform for Wireless Sensor Tags. (http://wirelesstags.net/)
 
-Polls status of the wireless tags on a configurable interval and based on data from the tags determines occupancy of those tags + current temperature in 
-degress celcius. 
-
-Occupancy is 0 if the tag is inactive or out of range. Otherwise it is considered occupancy 1.
-
-NOTE: Currently only supports the temperature tags. If someone wants to donate one of the other tag types happy to add them. :)
+Supports 13-bit temperature/humidity sensor, Pro ALS sensor, and PIR sensor.
  
 # Installation
 
@@ -38,5 +33,6 @@ Configuration sample:
  
  # To do
  * Re-add support for ignored tags and query frequency
- * Possibly reorganize classes so there is less duplicate code
+ * Reorganize classes so there is less duplicate code
+ * Configure which sensors should be included for each tag, since many support motion, temperature, humidity, and more.
 
