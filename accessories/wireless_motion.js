@@ -29,6 +29,9 @@ function WirelessMotionAccessory(platform, device) {
     // Light
     this.addService(Service.LightSensor)
         .getCharacteristic(Characteristic.CurrentAmbientLightLevel)
+        .setProps({
+            minValue: 0
+        })
         .on('get', function(callback) {
         callback(null, that.device.lux);
     });
@@ -81,6 +84,11 @@ function WirelessMotionAccessory(platform, device) {
 }
 
 var loadData = function() {
+    // Light
+    this.getService(Service.LightSensor)
+        .getCharacteristic(Characteristic.CurrentAmbientLightLevel)
+        .getValue();
+    
     // Motion
     this.getService(Service.MotionSensor)
         .getCharacteristic(Characteristic.MotionDetected)
