@@ -31,8 +31,7 @@ Configuration sample:
  * username - Your wirelesstags.net username
  * password - Your wirelesstags.net password
  
- # To do
- * Re-add support for ignored tags and query frequency
- * Reorganize classes so there is less duplicate code
- * Configure which sensors should be included for each tag, since many support motion, temperature, humidity, and more.
-
+# To do
+* Re-add support for ignored tags and query frequency
+* Reorganize classes so there is less duplicate code
+* Configure which sensors should be included for each tag, since many support motion, temperature, humidity, and more.
