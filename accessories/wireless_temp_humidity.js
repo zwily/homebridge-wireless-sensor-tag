@@ -36,6 +36,10 @@ function WirelessTempHumidityAccessory(platform, device) {
     // Temperature
     this.addService(Service.TemperatureSensor)
         .getCharacteristic(Characteristic.CurrentTemperature)
+        .setProps({
+		    minValue: -100,
+		    maxValue: 100
+		})
         .on('get', function (callback) {
         callback(null, that.device.temperature);
     });
