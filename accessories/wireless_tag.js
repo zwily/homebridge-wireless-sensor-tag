@@ -102,7 +102,6 @@ var getServices = function() {
 }
 
 var loadData = function() {
-    this.log('Refreshing');
     // Motion
     if (this.platform.motionSensors.indexOf(this.name) >= 0) {
         this.getService(Service.MotionSensor)
