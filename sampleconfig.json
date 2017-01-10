@@ -12,7 +12,9 @@
         {
             "platform": "wireless-sensor-tag",
             "username": "<<username>>",
-            "password": "<<password>>"
+            "password": "<<password>>",
+            "contactSensors": [],
+            "motionSensors": []
         }
     ],
 

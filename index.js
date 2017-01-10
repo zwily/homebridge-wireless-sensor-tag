@@ -3,8 +3,6 @@ var wirelesstags = require('./lib/wireless_tags_api');
 var Service, Characteristic, Accessory;
 
 var WirelessTagAccessory;
-var WirelessTempHumidityAccessory;
-var WirelessMotionAccessory;
 
 // Handle registration with homebridge
 module.exports = function(homebridge) {
@@ -13,8 +11,6 @@ module.exports = function(homebridge) {
     Accessory = homebridge.hap.Accessory;
     
     WirelessTagAccessory = require('./accessories/wireless_tag')(Accessory, Service, Characteristic);
-    WirelessTempHumidityAccessory = require('./accessories/wireless_temp_humidity')(WirelessTagAccessory, Accessory, Service, Characteristic);
-    WirelessMotionAccessory = require('./accessories/wireless_motion')(WirelessTagAccessory, Accessory, Service, Characteristic);
     
     homebridge.registerPlatform("homebridge-wireless-sensor-tag", "wireless-sensor-tag", WirelessTagPlatform);
 }
@@ -25,14 +21,12 @@ function WirelessTagPlatform(log, config) {
     this.password = config.password;
     this.queryFrequency = config.queryFrequency;
     this.log = log;
-    this.tagMap = {};
-    this.tagList = [];
-    this.ignoreList = (config.ignoreList == undefined) ? [] : config.ignoreList;
+    this.motionSensors = (config.motionSensors == undefined) ? [] : config.motionSensors;
+    this.contactSensors = (config.contactSensors == undefined) ? [] : config.contactSensors;
 }
 
 WirelessTagPlatform.prototype = {
     reloadData: function(callback) {
-        this.log("Refreshing Wireless Tag data");
         var that = this;
         var foundAccessories = [];
         
@@ -53,14 +47,7 @@ WirelessTagPlatform.prototype = {
                         accessory.loadData(device);
                     }
                     else {
-                        // New device - 13-bit temp/humidity sensor
-                        if (device.tagType === 13) {
-                            accessory = new WirelessTempHumidityAccessory(that, device);
-                        }
-                        // New device - Pro ALS or PIR sensor
-                        else if (device.tagType === 26 || device.tagType === 72) {
-                            accessory = new WirelessMotionAccessory(that, device);
-                        }
+                        accessory = new WirelessTagAccessory(that, device);
 
                         // Device successfully added
                         if (accessory !== undefined) {
