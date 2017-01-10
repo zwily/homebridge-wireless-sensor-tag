@@ -82,7 +82,13 @@ WirelessTagPlatform.prototype = {
             callback(foundAccessories);
         });
         
-        setInterval(that.reloadData.bind(that), 20000);
+        if (that.queryFrequency === undefined || that.queryFrequency < 5000) {
+            that.log('Invalid query frequency; setting to 20000ms default');
+            that.queryFrequency = 20000;
+        }
+        else {
+            setInterval(that.reloadData.bind(that), that.queryFrequency);
+        }
     }
 };
 
