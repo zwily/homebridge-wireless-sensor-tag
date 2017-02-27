@@ -17,8 +17,7 @@ module.exports = function(homebridge) {
 
 // Platform object for the wireless tags. Represents the wireless tag manager
 function WirelessTagPlatform(log, config) {
-    this.username = config.username;
-    this.password = config.password;
+    this.token = config.token;
     this.queryFrequency = config.queryFrequency;
     this.log = log;
     this.motionSensors = (config.motionSensors == undefined) ? [] : config.motionSensors;
@@ -30,12 +29,8 @@ WirelessTagPlatform.prototype = {
         var that = this;
         var foundAccessories = [];
         
-        wirelesstags.getTagList(this.username, this.password, function(authenticated, devices) {
-            if (!authenticated) {
-                that.log("getTagList - authentication failed");
-                callback([]);
-            }
-            else if (devices && devices instanceof Array) {
+        wirelesstags.getTagList(this.token, function(devices) {
+            if (devices && devices instanceof Array) {
                 for (var i = 0; i < devices.length; i++) {
                     var device = devices[i];
                     var accessory = undefined;
@@ -68,7 +63,9 @@ WirelessTagPlatform.prototype = {
             }
             else {
                 that.log("getTagList - error getting tag list");
-                callback(foundAccessories);
+                if (callback) {
+                    callback(foundAccessories);
+                }
             }
         });
     },
