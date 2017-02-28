@@ -19,8 +19,7 @@ Configuration sample:
         {
             "platform": "wireless-sensor-tag",
             "name": "wireless-sensor-tag",         
-            "username": "user@domain.com",      
-            "password": "password",
+            "token": "abc123",
             "queryFrequency": 20000,
             "motionSensors": [],
             "contactSensors": ["Mailbox"]
@@ -31,8 +30,7 @@ Configuration sample:
  Fields:
  * platform - Must be set to wireless-sensor-tag
  * name - Up to you. 
- * username - Your wirelesstags.net username
- * password - Your wirelesstags.net password
+ * token - Your OAuth2 access token - see http://wirelesstag.net/eth/oauth2_apps.html 
  * queryFrequency - The amount of time (in ms) between updates. Minimum value is 5000; default is 20000.
  * motionSensors - A list of sensors that should be treated like motion sensors in addition to temperature/humidity.
  * contactSensors - A list of sensors that should be treated like contact (open/close) sensors in addition to temperature/humidity. For the Pro ALS sensor, the "too bright" light state signifies "open" while "normal"/"too dark" signifies "closed"; for all other sensors, the "opened" and "closed" event states are used.
