@@ -11,8 +11,7 @@
     "platforms": [
         {
             "platform": "wireless-sensor-tag",
-            "username": "<<username>>",
-            "password": "<<password>>",
+            "token": "<<token>>",
             "queryFrequency": 20000,
             "contactSensors": [],
             "motionSensors": []
